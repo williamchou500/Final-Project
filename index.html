@@ -6,9 +6,38 @@
     <title>Glucose vs. Food</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script type = "module" src="./global.js"></script>
+    <script type = "module" src="global.js"></script>
 </head>
 <body>
-    <h1>Glucose vs Food (TEMPORARY TITLE)</h1>
+    <h2>Glucose vs. Food</h2>
+
+    <label for="time">Time of Day (Hour):</label>
+    <input type="range" id="time" min="0" max="24" value="12">
+    <span id="timeLabel">12</span>:00
+    <br><br>
+
+    <label>Calories: <input type="number" id="calories" /></label><br>
+    <label>Total Carbs (g): <input type="number" id="carbs" /></label><br>
+    <label>Dietary Fiber (g): <input type="number" id="fiber" /></label><br>
+    <label>Sugar (g): <input type="number" id="sugar" /></label><br>
+    <label>Total Fat (g): <input type="number" id="fat" /></label><br>
+    <label>Protein (g): <input type="number" id="protein" /></label><br>
+    <label>Hb1Ac: <input type="number" id="Hb1Ac" /></label><br>
+    <label>Gender: <select id="gender" size="2">
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+        </select>
+    </label><br><br>
+
+    <button id="submit">Submit</button>
+
+    <h3 id="result"></h3>
+
+    <h4 style="color: red">to do list i thought up:</h4>
+    <ul>
+        <li>make it log daily scores, give daily feedback, and give an overall score after a week (simulation ends after a week)</li>
+        <li>still need to compare scores to dataset values to make sure it's accurate</li>
+        <li>add a human/character to be the simulated subject</li>
+    </ul>
 </body>
 </html>
