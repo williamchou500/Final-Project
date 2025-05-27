@@ -58,7 +58,9 @@
 
       resultDisplay.textContent =
         `Expected Glucose Level: ${finalScore}`;
-
+        
+      updateCharacter(finalScore);  
+        
       logData.push({
         day: numDays,
         hour,
@@ -171,3 +173,13 @@
       summaryVisible = !summaryVisible;
       summaryArea.style.display = summaryVisible ? 'block' : 'none';
     });
+    function updateCharacter(glucoseLevel) {
+      const character = document.querySelector('#character');
+      if (glucoseLevel > 180) {
+        character.textContent = '😢';
+      } else if (glucoseLevel < 120) {
+        character.textContent = '😊';
+      } else {
+        character.textContent = '😐';
+      }
+    }
