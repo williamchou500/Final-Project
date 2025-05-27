@@ -13,30 +13,59 @@
 <div class="container">
   <h2>Glucose vs. Food</h2>
 
-  <label for="time">Time of Day (Hour):</label>
-  <input type="range" id="time" min="0" max="24" value="12">
-  <span id="timeLabel">12</span>:00
-  <label>Dish:</label>
-  <input type="text" id="dish">
-  <label>Calories:</label>
-  <input type="number" id="calories">
-  <label>Total Carbs (g):</label>
-  <input type="number" id="carbs">
-  <label>Dietary Fiber (g):</label>
-  <input type="number" id="fiber">
-  <label>Sugar (g):</label>
-  <input type="number" id="sugar">
-  <label>Total Fat (g):</label>
-  <input type="number" id="fat">
-  <label>Protein (g):</label>
-  <input type="number" id="protein">
-  <label>Hb1Ac:</label>
-  <input type="number" id="Hb1Ac">
-  <label>Gender:</label>
-  <select id="gender">
-    <option value="1">Male</option>
-    <option value="0">Female</option>
-  </select>
+  <div class="form-row">
+    <label for="time">Time of Day (Hour):</label>
+    <input type="range" id="time" min="0" max="24" value="12">
+    <span id="timeLabel">12</span>:00
+  </div>
+
+  <div class="form-row">
+    <label for="dish">Dish:</label>
+    <input type="text" id="dish">
+  </div>
+
+  <div class="form-row">
+    <label for="calories">Calories:</label>
+    <input type="number" id="calories">
+  </div>
+
+  <div class="form-row">
+    <label for="carbs">Total Carbs (g):</label>
+    <input type="number" id="carbs">
+  </div>
+
+  <div class="form-row">
+    <label for="fiber">Dietary Fiber (g):</label>
+    <input type="number" id="fiber">
+  </div>
+
+  <div class="form-row">
+    <label for="sugar">Sugar (g):</label>
+    <input type="number" id="sugar">
+  </div>
+
+  <div class="form-row">
+    <label for="fat">Total Fat (g):</label>
+    <input type="number" id="fat">
+  </div>
+
+  <div class="form-row">
+    <label for="protein">Protein (g):</label>
+    <input type="number" id="protein">
+  </div>
+
+  <div class="form-row">
+    <label for="Hb1Ac">Hb1Ac:</label>
+    <input type="number" id="Hb1Ac">
+  </div>
+
+  <div class="form-row">
+    <label for="gender">Gender:</label>
+    <select id="gender">
+      <option value="1">Male</option>
+      <option value="0">Female</option>
+    </select>
+  </div>
 
   <button id="submit">Submit</button>
 
