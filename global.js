@@ -15,6 +15,8 @@
   const width = 400;
   const height = 200;
   const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  const baseline = 110;
+
 
 
   const svg = d3.select("#graph")
@@ -23,13 +25,14 @@
     .attr("height", height);
     
   const xScale = d3.scaleLinear()
+    .domain([0,24])
     .range([margin.left, width - margin.right]);
 
   const yScale = d3.scaleLinear()
     .range([height - margin.bottom, margin.top]);
     
   const lineGenerator = d3.line()
-    .x(d => xScale(d.timeInHours))
+    .x(d => xScale(d.hour))
     .y(d => yScale(d.finalScore));
 
   const xAxis = svg.append("g")
@@ -231,14 +234,25 @@
     }
 
     function renderGraph() {
-      xScale.domain(d3.extent(logData, d => d.timeInHours));
-      yScale.domain([0, d3.max(logData, d => d.finalScore)]);
-
-      path.datum(logData).attr("d", lineGenerator);
-
+      const graphData = logData.flatMap(entry => {
+        const { hour, finalScore, ...rest } = entry;
+        const base = 110;
+    
+        return [
+          { ...rest, hour, finalScore: base },
+          { ...rest, hour: hour + 1, finalScore },
+          { ...rest, hour: hour + 2, finalScore: base }
+        ];
+      }).sort((a, b) => a.hour - b.hour);
+    
+      yScale.domain([0, d3.max(graphData, d => d.finalScore)]);
+    
+      path.datum(graphData).attr("d", lineGenerator);
+    
       xAxis.call(d3.axisBottom(xScale));
       yAxis.call(d3.axisLeft(yScale));
     }
+    
 
 
 
