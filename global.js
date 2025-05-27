@@ -60,7 +60,11 @@
         `Expected Glucose Level: ${finalScore}`;
         
       updateCharacter(finalScore);  
-        
+      const pacman = document.querySelector('#pacman');
+      pacman.classList.remove('eat-animation');
+      void pacman.offsetWidth;
+      pacman.classList.add('eat-animation');
+
       logData.push({
         day: numDays,
         dish,
@@ -194,3 +198,4 @@
       plateFill.setAttribute('stroke-dashoffset', dashOffset);
       plateFill.setAttribute('fill', fillPercent > 0 ? 'lightgreen' : 'none');
     }
+    
