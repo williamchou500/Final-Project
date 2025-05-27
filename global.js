@@ -9,6 +9,7 @@
     const logBtn = document.querySelector('#logBtn');
     const logArea = document.querySelector('#logArea');
     const summaryArea = document.querySelector('#summaryArea');
+    const graph = document.querySelector('#graph');
 
     // Initialize graph 
 
@@ -147,6 +148,7 @@
       showSummary();
       numDays++;
       renderGraph();
+      graph.style.display = 'block';
     });
 
     console.log(logData);
