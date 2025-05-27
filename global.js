@@ -174,14 +174,23 @@
       summaryVisible = !summaryVisible;
       summaryArea.style.display = summaryVisible ? 'block' : 'none';
     });
-    function updateCharacter(glucoseLevel) {
-      console.log('updateCharacter called with:', glucoseLevel);
-      const character = document.querySelector('#character');
-      if (glucoseLevel > 180) {
-        character.textContent = '😢';
-      } else if (glucoseLevel < 120) {
-        character.textContent = '😊';
+    function updateCharacter(glucoseLevel, calories) {
+      const pacman = document.querySelector('#pacman circle');
+      let color;
+      if (glucoseLevel < 120) {
+        color = 'green';
+      } else if (glucoseLevel < 180) {
+        color = 'yellow';
       } else {
-        character.textContent = '😐';
+        color = 'red';
       }
+      pacman.setAttribute('fill', color);
+      const plateFill = document.querySelector('#plate-fill');
+      const maxCalories = 800;
+      const fillPercent = Math.min(calories / maxCalories, 1);
+      const dashArray = 2 * Math.PI * 25;
+      const dashOffset = dashArray * (1 - fillPercent);
+      plateFill.setAttribute('stroke-dasharray', dashArray);
+      plateFill.setAttribute('stroke-dashoffset', dashOffset);
+      plateFill.setAttribute('fill', fillPercent > 0 ? 'lightgreen' : 'none');
     }
