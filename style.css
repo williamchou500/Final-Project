@@ -1,0 +1,8 @@
+#logArea {
+      display: none;
+}
+
+.danger {
+      color: red;
+      font-weight: bold;
+    }

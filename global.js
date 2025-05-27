@@ -3,6 +3,8 @@
     const submit = document.querySelector('#submit');
     const resultDisplay = document.querySelector('#result');
     const inputGender = document.querySelector('#gender')
+    const logBtn = document.querySelector('#logBtn');
+    const logArea = document.querySelector('#logArea');
 
     // Nutrient weights
     const weights = {
@@ -16,6 +18,10 @@
         dietary_fiber: 0.061027,
         gender: 0.048618,
     };
+
+    const logData = [];
+
+    let numDays = 1;
 
     // Update label when slider moves
     timeInput.addEventListener('input', () => {
@@ -31,8 +37,8 @@
       const total_fat = parseFloat(document.querySelector('#fat').value) || 0;
       const protein = parseFloat(document.querySelector('#protein').value) || 0;
       const Hb1Ac = parseFloat(document.querySelector('#Hb1Ac').value) || 0;
-      const hour = parseInt(timeInput.value);
-      const gender = parseInt(inputGender.value)
+      const hour = parseInt(timeInput.value) || 12;
+      const gender = parseInt(inputGender.value) || 0;
 
       const nutrientScore =
         calories * weights.calories +
@@ -48,4 +54,51 @@
 
       resultDisplay.textContent =
         `Expected Glucose Level: ${finalScore}`;
+
+      logData.push({
+        hour,
+        calories,
+        carbs,
+        sugar,
+        protein,
+        finalScore
+      });
+
+      updateLog();
+
     });
+
+    let logVisible = false;
+
+    logBtn.addEventListener('click', () => {
+      logVisible = !logVisible;
+      logArea.style.display = logVisible ? 'block' : 'none';
+    });
+
+    function updateLog() {
+      const entries = logData.map(entry => {
+        const warning = entry.finalScore > 180
+          ? `<br><span class="danger">Dangerous glucose spike occurred!</span>`
+          : '';
+
+        return `
+          <div class="log-entry">
+            <strong>Day ${numDays}:<br><br>
+            <strong>Time:</strong> ${entry.hour}:00<br>
+            <strong>Calories:</strong> ${entry.calories}<br>
+            <strong>Carbs:</strong> ${entry.carbs}g<br>
+            <strong>Sugar:</strong> ${entry.sugar}g<br>
+            <strong>Protein:</strong> ${entry.protein}g<br>
+            <strong>Glucose Level:</strong> ${entry.finalScore}
+            ${warning}
+            <br><br>
+          </div>`;
+      }).join('');
+
+      logArea.innerHTML = `<h3>Meal Log</h3>${entries}`;
+
+      if (logVisible) {
+        logArea.style.display = 'block';
+      }
+    }
+        
