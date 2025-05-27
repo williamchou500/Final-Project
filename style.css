@@ -1,15 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  margin: 20px;
-  line-height: 1.6;
-}
-
-h2, h3, h4 {
-  text-align: center;
-  color: #333333;
-}
-
 .container {
   max-width: 600px;
   margin: 20px auto;
@@ -19,10 +7,18 @@ h2, h3, h4 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+h2, h3, h4 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+
 label {
   display: block;
-  margin: 10px 0 5px;
-  font-weight: bold;
+  margin: 5px 0 3px;
+  font-weight: 600;
+  font-size: 0.95em;
 }
 
 input[type="number"],
@@ -30,10 +26,11 @@ input[type="text"],
 select {
   width: 100%;
   box-sizing: border-box;
-  padding: 5px;
-  border: 1px solid #cccccc;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  font-size: 0.95em;
 }
 
 input[type="range"] {
@@ -44,11 +41,12 @@ input[type="range"] {
 button, #submit, #logBtn, #summaryBtn {
   background-color: #4CAF50;
   color: white;
-  padding: 10px 15px;
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
+  font-size: 0.95em;
 }
 
 button:hover, #submit:hover, #logBtn:hover, #summaryBtn:hover {
@@ -56,34 +54,34 @@ button:hover, #submit:hover, #logBtn:hover, #summaryBtn:hover {
 }
 
 #result {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin-top: 15px;
   text-align: center;
   font-weight: bold;
 }
 
 #character {
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 #logArea, #summaryArea {
   display: none;
   max-height: 600px;
   overflow-y: auto;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .log-entry, .summary {
-  background-color: #ffffff;
+  background-color: #fff;
   border-left: 4px solid #4CAF50;
-  margin: 10px 0;
-  padding: 10px;
+  margin: 8px 0;
+  padding: 8px;
   border-radius: 4px;
 }
 
