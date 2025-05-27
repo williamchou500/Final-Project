@@ -60,11 +60,7 @@
         `Expected Glucose Level: ${finalScore}`;
         
       updateCharacter(finalScore);  
-      const pacman = document.querySelector('#pacman');
-      pacman.classList.remove('eat-animation');
-      void pacman.offsetWidth;
-      pacman.classList.add('eat-animation');
-
+        
       logData.push({
         day: numDays,
         dish,
@@ -178,37 +174,14 @@
       summaryVisible = !summaryVisible;
       summaryArea.style.display = summaryVisible ? 'block' : 'none';
     });
-    function updateCharacter(glucoseLevel, calories) {
-      const pacman = document.querySelector('#pacman circle');
-      const polygon = document.querySelector('#pacman polygon');
-      let color;
-      if (glucoseLevel < 120) {
-        color = 'green';
-      } else if (glucoseLevel < 180) {
-        color = 'yellow';
-      } else if (glucoseLevel < 250) {
-        color = 'orange';
+    function updateCharacter(glucoseLevel) {
+      console.log('updateCharacter called with:', glucoseLevel);
+      const character = document.querySelector('#character');
+      if (glucoseLevel > 180) {
+        character.textContent = '😢';
+      } else if (glucoseLevel < 120) {
+        character.textContent = '😊';
       } else {
-        color = 'red';
-      }
-      pacman.setAttribute('fill', color);
-      const pacmanSvg = document.querySelector('#pacman');
-      pacmanSvg.classList.remove('eat-animation');
-      void pacmanSvg.offsetWidth;
-      pacmanSvg.classList.add('eat-animation');
-      polygon.style.animation = 'chomp 0.3s infinite alternate';
-      const plateFill = document.querySelector('#plate-fill');
-      const maxCalories = 800;
-      const fillPercent = Math.min(calories / maxCalories, 1);
-      const dashArray = 2 * Math.PI * 25;
-      const dashOffset = dashArray * (1 - fillPercent);
-      plateFill.setAttribute('stroke-dasharray', dashArray);
-      plateFill.setAttribute('stroke-dashoffset', dashOffset);
-      if (fillPercent === 0) {
-        plateFill.setAttribute('fill', 'none');
-      } else {
-        plateFill.setAttribute('fill', 'lightgreen');
+        character.textContent = '😐';
       }
     }
-
-    
