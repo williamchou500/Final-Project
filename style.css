@@ -127,7 +127,7 @@ button:hover, #submit:hover, #logBtn:hover, #summaryBtn:hover {
 }
 #eat-container {
   position: relative;
-  width: 140px; 
+  width: 140px;
   margin: 0 auto;
   height: 60px;
 }
@@ -143,6 +143,7 @@ button:hover, #submit:hover, #logBtn:hover, #summaryBtn:hover {
   right: 0;
   top: 0;
 }
+
 .eat-animation {
   animation: moveToPlate 1s forwards;
 }
