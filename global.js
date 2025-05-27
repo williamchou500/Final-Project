@@ -17,6 +17,12 @@
   const margin = { top: 20, right: 20, bottom: 20, left: 20 };
   const baseline = 110;
 
+  const glucoseArray = Array.from({ length: 24 }, (_, hour) => ({
+    hour,
+    finalScore: baseline
+  }));
+
+
 
 
   const svg = d3.select("#graph")
@@ -29,22 +35,28 @@
     .range([margin.left, width - margin.right]);
 
   const yScale = d3.scaleLinear()
-    .range([height - margin.bottom, margin.top]);
+    .range([height - margin.bottom, margin.top])
+    .domain([50, 250]);
     
   const lineGenerator = d3.line()
     .x(d => xScale(d.hour))
-    .y(d => yScale(d.finalScore));
+    .y(d => yScale(d.finalScore))
+    .curve(d3.curveMonotoneX);
 
   const xAxis = svg.append("g")
     .attr("transform", `translate(0, ${height - margin.bottom})`)
+    .call(d3.axisBottom(xScale));
   
   const yAxis = svg.append("g")
     .attr("transform", `translate(${margin.left}, 0)`)
+    .call(d3.axisLeft(yScale));
   
   const path = svg.append("path")
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-width", 2);
+
+  renderGraph();
   
     
 
@@ -115,6 +127,21 @@
         timeInHours,
         finalScore
       });
+
+      // Update glucoseArray
+
+      for (let i = 0; i < glucoseArray.length; i++) {
+        glucoseArray[i].finalScore = baseline;
+      }
+
+      if (hour + 1 < glucoseArray.length) {
+        glucoseArray[hour + 1].finalScore = finalScore;
+      }
+
+      if (hour + 2 < glucoseArray.length) {
+        glucoseArray[hour + 2].finalScore = baseline;
+      }
+      
 
       updateLog();
       showSummary();
@@ -234,23 +261,9 @@
     }
 
     function renderGraph() {
-      const graphData = logData.flatMap(entry => {
-        const { hour, finalScore, ...rest } = entry;
-        const base = 110;
     
-        return [
-          { ...rest, hour, finalScore: base },
-          { ...rest, hour: hour + 1, finalScore },
-          { ...rest, hour: hour + 2, finalScore: base }
-        ];
-      }).sort((a, b) => a.hour - b.hour);
+      path.datum(glucoseArray).attr("d", lineGenerator);
     
-      yScale.domain([0, d3.max(graphData, d => d.finalScore)]);
-    
-      path.datum(graphData).attr("d", lineGenerator);
-    
-      xAxis.call(d3.axisBottom(xScale));
-      yAxis.call(d3.axisLeft(yScale));
     }
     
 
