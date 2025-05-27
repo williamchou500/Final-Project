@@ -13,74 +13,36 @@
 <div class="container">
   <h2>Glucose vs. Food</h2>
 
-  <div class="form-row">
-    <label for="time">Time of Day (Hour):</label>
-    <input type="range" id="time" min="0" max="24" value="12">
-    <span id="timeLabel">12</span>:00
-  </div>
-
-  <div class="form-row">
-    <label for="dish">Dish:</label>
-    <input type="text" id="dish">
-  </div>
-
-  <div class="form-row">
-    <label for="calories">Calories:</label>
-    <input type="number" id="calories">
-  </div>
-
-  <div class="form-row">
-    <label for="carbs">Total Carbs (g):</label>
-    <input type="number" id="carbs">
-  </div>
-
-  <div class="form-row">
-    <label for="fiber">Dietary Fiber (g):</label>
-    <input type="number" id="fiber">
-  </div>
-
-  <div class="form-row">
-    <label for="sugar">Sugar (g):</label>
-    <input type="number" id="sugar">
-  </div>
-
-  <div class="form-row">
-    <label for="fat">Total Fat (g):</label>
-    <input type="number" id="fat">
-  </div>
-
-  <div class="form-row">
-    <label for="protein">Protein (g):</label>
-    <input type="number" id="protein">
-  </div>
-
-  <div class="form-row">
-    <label for="Hb1Ac">Hb1Ac:</label>
-    <input type="number" id="Hb1Ac">
-  </div>
-
-  <div class="form-row">
-    <label for="gender">Gender:</label>
-    <select id="gender">
-      <option value="1">Male</option>
-      <option value="0">Female</option>
-    </select>
-  </div>
+  <label for="time">Time of Day (Hour):</label>
+  <input type="range" id="time" min="0" max="24" value="12">
+  <span id="timeLabel">12</span>:00
+  <label>Dish:</label>
+  <input type="text" id="dish">
+  <label>Calories:</label>
+  <input type="number" id="calories">
+  <label>Total Carbs (g):</label>
+  <input type="number" id="carbs">
+  <label>Dietary Fiber (g):</label>
+  <input type="number" id="fiber">
+  <label>Sugar (g):</label>
+  <input type="number" id="sugar">
+  <label>Total Fat (g):</label>
+  <input type="number" id="fat">
+  <label>Protein (g):</label>
+  <input type="number" id="protein">
+  <label>Hb1Ac:</label>
+  <input type="number" id="Hb1Ac">
+  <label>Gender:</label>
+  <select id="gender">
+    <option value="1">Male</option>
+    <option value="0">Female</option>
+  </select>
 
   <button id="submit">Submit</button>
 
   <h3 id="result"></h3>
-  <div id="eat-container">
-    <svg id="pacman" width="60" height="60" viewBox="0 0 60 60">
-      <circle cx="30" cy="30" r="30" fill="green"/>
-      <polygon points="30,30 60,15 60,45" fill="white"/>
-    </svg>
-    <svg id="plate" width="60" height="60" viewBox="0 0 60 60">
-      <circle cx="30" cy="30" r="25" fill="none" stroke="grey" stroke-width="4"/>
-      <circle id="plate-fill" cx="30" cy="30" r="25" fill="lightgreen" stroke="none" stroke-width="0"
-        stroke-dasharray="157" stroke-dashoffset="157" transform="rotate(-90 30 30)"/>
-    </svg>
-  </div>
+  <div id="character">😐</div>
+
   <button id="logBtn">Log</button>
   <div id="logArea"></div>
 
