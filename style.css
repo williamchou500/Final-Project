@@ -1,11 +1,18 @@
 #logArea {
-      display: none;
-      max-height: 600px;
-      max-width: 300px;
-      overflow-y: auto; 
+    display: none;
+    max-height: 600px;
+    max-width: 300px;
+    overflow-y: auto; 
+}
+
+#summaryArea {
+    display: none;
+    max-height: 600px;
+    max-width: 300px;
+    overflow-y: auto; 
 }
 
 .danger {
-      color: red;
-      font-weight: bold;
-    }
+    color: red;
+    font-weight: bold;
+}

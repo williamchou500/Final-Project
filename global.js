@@ -5,6 +5,7 @@
     const inputGender = document.querySelector('#gender')
     const logBtn = document.querySelector('#logBtn');
     const logArea = document.querySelector('#logArea');
+    const summaryArea = document.querySelector('#summaryArea');
 
     // Nutrient weights
     const weights = {
@@ -22,6 +23,8 @@
     const logData = [];
 
     let numDays = 1;
+
+    let numWarnings = 0;
 
     // Update label when slider moves
     timeInput.addEventListener('input', () => {
@@ -58,7 +61,6 @@
 
       logData.push({
         day: numDays,
-        dish,
         hour,
         calories,
         carbs,
@@ -68,9 +70,8 @@
       });
 
       updateLog();
-
-      numDays = numDays + 1;
-
+      showSummary();
+      numDays++;
     });
 
     let logVisible = false;
@@ -85,6 +86,10 @@
         const warning = entry.finalScore > 180
           ? `<br><span class="danger">Dangerous glucose spike occurred!</span>`
           : '';
+
+        if (warning) {
+          numWarnings = numWarnings + 1;
+        }
 
         return `
           <div class="log-entry">
@@ -107,4 +112,62 @@
         logArea.style.display = 'block';
       }
     }
-        
+
+    function showSummary() {
+      if (numDays % 7 !== 0) return;
+
+      const block = Math.floor((numDays - 1) / 7) + 1;
+      const startDay = (block - 1) * 7 + 1;
+      const endDay = block * 7;
+
+      const blockEntries = logData.filter(entry => entry.day >= startDay && entry.day <= endDay);
+
+      const total = {
+        calories: 0,
+        carbs: 0,
+        sugar: 0,
+        protein: 0,
+        dangerousSpikes: 0
+      };
+
+      blockEntries.forEach(entry => {
+        total.calories += entry.calories;
+        total.carbs += entry.carbs;
+        total.sugar += entry.sugar;
+        total.protein += entry.protein;
+        if (entry.finalScore > 180) total.dangerousSpikes++;
+      });
+
+      const avg = {
+        calories: (total.calories / 7).toFixed(2),
+        carbs: (total.carbs / 7).toFixed(2),
+        sugar: (total.sugar / 7).toFixed(2),
+        protein: (total.protein / 7).toFixed(2)
+      };
+
+      summaryArea.insertAdjacentHTML('beforeend', `
+        <div class="summary">
+          <h3>Days ${startDay} to ${endDay} Summary</h3>
+          <strong>Total Nutrients Consumed:</strong><br>
+          Calories: ${total.calories}<br>
+          Carbs: ${total.carbs}g<br>
+          Sugar: ${total.sugar}g<br>
+          Protein: ${total.protein}g<br><br>
+
+          <strong>Average Nutrients per Day:</strong><br>
+          Calories: ${avg.calories}<br>
+          Carbs: ${avg.carbs}g<br>
+          Sugar: ${avg.sugar}g<br>
+          Protein: ${avg.protein}g<br><br>
+
+          <strong>Dangerous Glucose Spikes:</strong> ${total.dangerousSpikes}
+        </div>
+      `);
+    }
+
+    let summaryVisible = false;
+
+    summaryBtn.addEventListener('click', () => {
+      summaryVisible = !summaryVisible;
+      summaryArea.style.display = summaryVisible ? 'block' : 'none';
+    });
