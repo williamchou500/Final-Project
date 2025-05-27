@@ -56,6 +56,7 @@
         `Expected Glucose Level: ${finalScore}`;
 
       logData.push({
+        day: numDays,
         hour,
         calories,
         carbs,
@@ -65,6 +66,8 @@
       });
 
       updateLog();
+
+      numDays = numDays + 1;
 
     });
 
@@ -83,7 +86,7 @@
 
         return `
           <div class="log-entry">
-            <strong>Day ${numDays}:<br><br>
+            <strong>Day ${entry.day}:<br><br>
             <strong>Time:</strong> ${entry.hour}:00<br>
             <strong>Calories:</strong> ${entry.calories}<br>
             <strong>Carbs:</strong> ${entry.carbs}g<br>
