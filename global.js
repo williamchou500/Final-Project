@@ -1,3 +1,6 @@
+    import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+
+    
     const timeInput = document.querySelector('#time');
     const timeLabel = document.querySelector('#timeLabel');
     const submit = document.querySelector('#submit');
@@ -6,6 +9,41 @@
     const logBtn = document.querySelector('#logBtn');
     const logArea = document.querySelector('#logArea');
     const summaryArea = document.querySelector('#summaryArea');
+
+    // Initialize graph 
+
+  const width = 400;
+  const height = 200;
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+
+  const svg = d3.select("#graph")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+  const xScale = d3.scaleLinear()
+    .range([margin.left, width - margin.right]);
+
+  const yScale = d3.scaleLinear()
+    .range([height - margin.bottom, margin.top]);
+    
+  const lineGenerator = d3.line()
+    .x(d => xScale(d.timeInHours))
+    .y(d => yScale(d.finalScore));
+
+  const xAxis = svg.append("g")
+    .attr("transform", `translate(0, ${height - margin.bottom})`)
+  
+  const yAxis = svg.append("g")
+    .attr("transform", `translate(${margin.left}, 0)`)
+  
+  const path = svg.append("path")
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 2);
+  
+    
 
     // Nutrient weights
     const weights = {
@@ -60,6 +98,8 @@
         `Expected Glucose Level: ${finalScore}`;
         
       updateCharacter(finalScore);  
+
+      const timeInHours = (numDays - 1) * 24 + hour;
         
       logData.push({
         day: numDays,
@@ -69,13 +109,17 @@
         carbs,
         sugar,
         protein,
+        timeInHours,
         finalScore
       });
 
       updateLog();
       showSummary();
       numDays++;
+      renderGraph();
     });
+
+    console.log(logData);
 
     let logVisible = false;
 
@@ -185,3 +229,17 @@
         character.textContent = '😐';
       }
     }
+
+    function renderGraph() {
+      xScale.domain(d3.extent(logData, d => d.timeInHours));
+      yScale.domain([0, d3.max(logData, d => d.finalScore)]);
+
+      path.datum(logData).attr("d", lineGenerator);
+
+      xAxis.call(d3.axisBottom(xScale));
+      yAxis.call(d3.axisLeft(yScale));
+    }
+
+
+
+    
