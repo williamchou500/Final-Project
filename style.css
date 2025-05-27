@@ -6,7 +6,26 @@ body {
   display: flex;
   justify-content: center;
 }
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
 
+.form-row label {
+  flex: 0 0 120px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 .container {
   background: white;
   padding: 20px;
