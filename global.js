@@ -96,14 +96,14 @@
 
         return `
           <div class="log-entry">
-            <strong>Day ${entry.day}:<br><br>
-            Dish: ${entry.dish}<br>
-            Time: ${entry.hour}:00<br>
-            Calories: ${entry.calories}<br>
-            Carbs: ${entry.carbs}g<br>
-            Sugar: ${entry.sugar}g<br>
-            Protein: ${entry.protein}g<br>
-            Glucose Level: ${entry.finalScore}
+            <strong>Day${entry.day}:</strong><br><br>
+            <strong>Dish:</strong> ${entry.dish}<br>
+            <strong>Time:</strong> ${entry.hour}:00<br>
+            <strong>Calories:</strong> ${entry.calories}<br>
+            <strong>Carbs:</strong> ${entry.carbs}g<br>
+            <strong>Sugar:</strong> ${entry.sugar}g<br>
+            <strong>Protein:</strong> ${entry.protein}g<br>
+            <strong>Glucose Level:</strong> ${entry.finalScore}
             ${warning}
             <br><br>
           </div>`;
