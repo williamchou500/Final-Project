@@ -30,6 +30,7 @@
 
     // Calculate score on submit
     submit.addEventListener('click', () => {
+      const dish = document.querySelector('#dish').value || 'No dish named';
       const calories = parseFloat(document.querySelector('#calories').value) || 0;
       const carbs = parseFloat(document.querySelector('#carbs').value) || 0;
       const dietary_fiber = parseFloat(document.querySelector('#fiber').value) || 0;
@@ -57,6 +58,7 @@
 
       logData.push({
         day: numDays,
+        dish,
         hour,
         calories,
         carbs,
@@ -87,6 +89,7 @@
         return `
           <div class="log-entry">
             <strong>Day ${entry.day}:<br><br>
+            <strong>Dish:</strong> ${entry.dish}<br>
             <strong>Time:</strong> ${entry.hour}:00<br>
             <strong>Calories:</strong> ${entry.calories}<br>
             <strong>Carbs:</strong> ${entry.carbs}g<br>
