@@ -180,15 +180,23 @@
     });
     function updateCharacter(glucoseLevel, calories) {
       const pacman = document.querySelector('#pacman circle');
+      const polygon = document.querySelector('#pacman polygon');
       let color;
       if (glucoseLevel < 120) {
         color = 'green';
       } else if (glucoseLevel < 180) {
         color = 'yellow';
+      } else if (glucoseLevel < 250) {
+        color = 'orange';
       } else {
         color = 'red';
       }
       pacman.setAttribute('fill', color);
+      const pacmanSvg = document.querySelector('#pacman');
+      pacmanSvg.classList.remove('eat-animation');
+      void pacmanSvg.offsetWidth;
+      pacmanSvg.classList.add('eat-animation');
+      polygon.style.animation = 'chomp 0.3s infinite alternate';
       const plateFill = document.querySelector('#plate-fill');
       const maxCalories = 800;
       const fillPercent = Math.min(calories / maxCalories, 1);
@@ -196,6 +204,11 @@
       const dashOffset = dashArray * (1 - fillPercent);
       plateFill.setAttribute('stroke-dasharray', dashArray);
       plateFill.setAttribute('stroke-dashoffset', dashOffset);
-      plateFill.setAttribute('fill', fillPercent > 0 ? 'lightgreen' : 'none');
+      if (fillPercent === 0) {
+        plateFill.setAttribute('fill', 'none');
+      } else {
+        plateFill.setAttribute('fill', 'lightgreen');
+      }
     }
+
     
