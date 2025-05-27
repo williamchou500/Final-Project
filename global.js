@@ -63,6 +63,7 @@
         
       logData.push({
         day: numDays,
+        dish,
         hour,
         calories,
         carbs,
