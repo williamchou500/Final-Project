@@ -174,6 +174,7 @@
       summaryArea.style.display = summaryVisible ? 'block' : 'none';
     });
     function updateCharacter(glucoseLevel) {
+      console.log('updateCharacter called with:', glucoseLevel);
       const character = document.querySelector('#character');
       if (glucoseLevel > 180) {
         character.textContent = '😢';
