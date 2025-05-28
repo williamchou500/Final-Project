@@ -15,7 +15,7 @@
 
   const width = 400;
   const height = 200;
-  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  const margin = { top: 20, right: 20, bottom: 20, left: 50 };
   const baseline = 110;
 
   const glucoseArray = Array.from({ length: 24 }, (_, hour) => ({
