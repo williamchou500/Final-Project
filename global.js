@@ -263,8 +263,10 @@
     }
 
     function renderGraph() {
-    
+      yScale.domain([50, d3.max(glucoseArray, d => d.finalScore) + 20]);
+      yAxis.call(d3.axisLeft(yScale));
       path.datum(glucoseArray).attr("d", lineGenerator);
+      path.datum(glucoseArray).transition().duration(500).attr("d", lineGenerator);
     
     }
     
