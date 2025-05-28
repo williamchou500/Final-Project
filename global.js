@@ -265,6 +265,8 @@
     function renderGraph() {
       yScale.domain([50, d3.max(glucoseArray, d => d.finalScore) + 20]);
       yAxis.call(d3.axisLeft(yScale));
+
+  
       const linePath = lineGenerator(glucoseArray);
       path.datum(glucoseArray).attr("d", linePath);
       const totalLength = path.node().getTotalLength();
@@ -272,27 +274,30 @@
         .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-        .duration(1500)
+        .duration(3000)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
       const maxPoint = glucoseArray.reduce((max, point) =>
         point.finalScore > max.finalScore ? point : max, glucoseArray[0]);
-
       svg.selectAll(".peak-dot").remove();
       svg.selectAll(".peak-tooltip").remove();
-
-      svg.append("circle")
+      const peakDot = svg.append("circle")
         .attr("class", "peak-dot")
         .attr("cx", xScale(maxPoint.hour))
         .attr("cy", yScale(maxPoint.finalScore))
         .attr("r", 5)
         .attr("fill", "red");
 
-      svg.append("text")
+      const tooltip = svg.append("text")
         .attr("class", "peak-tooltip")
         .attr("x", xScale(maxPoint.hour))
         .attr("y", yScale(maxPoint.finalScore) - 10)
         .attr("text-anchor", "middle")
         .attr("fill", "red")
+        .style("opacity", 0)
         .text(`Peak: ${maxPoint.finalScore.toFixed(1)}`);
+
+      peakDot
+        .on("mouseover", () => tooltip.style("opacity", 1))
+        .on("mouseout", () => tooltip.style("opacity", 0));
     }
